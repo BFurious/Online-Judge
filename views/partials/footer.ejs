@@ -1,0 +1,21 @@
+</main>
+<div class="sidebar">
+    <ul class="sidebar-list">
+        <li class="sidebar-item"><a href="/home" class="sidebar-anchor">HOME</a></li>
+        <li class="sidebar-item"><a href="/problems" class="sidebar-anchor">PROBLEMS</a></li>
+        <%if(currentUser != null){%>
+            <li class="sidebar-item"><a href="#" class="sidebar-anchor"><%=currentUser.username%></a></li>
+            <li class="sidebar-item"><a href="/logout" class="sidebar-anchor">LOGOUT</a></li>
+        <%}else{%>
+            <li class="sidebar-item"><a href="/register_U" class="sidebar-anchor">REGISTER/LOGIN</a></li>
+        <%}%>
+    </ul>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.js" integrity="sha512-E378bwaeZf1nwXeJGIwTB58A5gPt5jFU3u6aTGja4ZdRFJeo/N/REKnBgNZOZlH6JdnOPO98vg2AnSGaNfCMFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/login.js"></script>
+</body>
+</html>

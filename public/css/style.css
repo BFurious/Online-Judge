@@ -1,0 +1,10 @@
+.card-body textarea{
+    background-color: #141414;
+    color: #fdee73;
+    border-width: 10px;
+    width: 100%;
+    padding: 2%;
+    height: 400px;
+    border-radius: 1px;
+    font-size: 15px;
+}

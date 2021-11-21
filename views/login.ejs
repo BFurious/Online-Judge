@@ -1,0 +1,442 @@
+<%- include("./partials/contributor/header.ejs") %>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+
+<%if(error && error.length){%>
+	<body class="" onload="nowuiDashboard.showNotification('bottom','right','error','<%=error%>')">
+		<div class="wrapper ">
+		  <div class="sidebar" data-color="orange">
+			<div class="logo">
+			  <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+				  ONLINE JUDGE
+				</a>
+			</div>
+			<div class="sidebar-wrapper" id="sidebar-wrapper">
+			  <ul class="nav">
+				  <%if(currentUser != null){%>
+				  <li>
+					  <a href="/profile">
+					  <i class="now-ui-icons users_single-02"></i>
+					  <p>User Profile</p>
+					  </a>
+				  </li>
+				  <%}%>
+				  <li>
+					  <a href="/problems">
+					  <i class="now-ui-icons design_bullet-list-67"></i>
+					  <p>Problems</p>
+					  </a>
+				  </li>
+				  <%if(currentUser == null){%>
+					  <li>
+						  <a href="/register_U">
+							<i class="now-ui-icons ui-1_send"></i>
+							<p>Register For Users</p>
+						  </a>
+						</li>
+						<li>
+						  <a href="/register_C">
+							<i class="now-ui-icons ui-1_send"></i>
+							<p>Register For Contributors</p>
+						  </a>
+						</li>
+						<li>
+					  <li  class="active ">
+						<a href="/Login">
+						  <i class="now-ui-icons objects_key-25"></i>
+						  <p>Login</p>
+						</a>
+					  </li>
+				  <%}%>
+			  </ul>
+			</div>
+		  </div>
+		  <div class="main-panel" id="main-panel">
+			<!-- Navbar -->
+			<nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+			  <div class="container-fluid">
+				<div class="navbar-wrapper">
+				  <div class="navbar-toggle">
+					<button type="button" class="navbar-toggler">
+					  <span class="navbar-toggler-bar bar1"></span>
+					  <span class="navbar-toggler-bar bar2"></span>
+					  <span class="navbar-toggler-bar bar3"></span>
+					</button>
+				  </div>
+				  <a class="navbar-brand" href="">Login</a>
+				</div>
+				<%if(currentUser != null){%>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+				</button>
+				  <div class="collapse navbar-collapse justify-content-end" id="navigation">
+					<ul class="navbar-nav">
+					  <li class="nav-item">
+						<a class="nav-link" href="/profile">
+						  <i class="now-ui-icons users_single-02"></i>
+						  <p><%=currentUser.username%></p>
+						</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="/logout">
+						  <i class="now-ui-icons media-1_button-power"></i>
+						  <p> Logout </p>
+						</a>
+					  </li>
+					</ul>
+				  </div>
+				  <%}%>
+			  </div>
+			</nav>
+			<!-- End Navbar -->
+			<div class="panel-header panel-header-sm">
+			</div>
+			<div class="content">
+			  <div class="row">
+				  <div class="col-md-12">
+					  <div class="card card-plain">
+						<div class="card-header">
+						</div>
+						<div class="card-body" style="padding-top: 5%;">
+						  <div class="container">
+							  <div class="left">
+								<div class="login">Login</div>
+								<div class="eula">Welcome Back! To keep connected with us please login with your personal info.</div>
+							  </div>
+							  <div class="right">
+								<svg viewBox="0 0 320 300">
+								  <defs>
+									<linearGradient
+													inkscape:collect="always"
+													id="linearGradient"
+													x1="13"
+													y1="193.49992"
+													x2="307"
+													y2="193.49992"
+													gradientUnits="userSpaceOnUse">
+									  <stop
+											style="stop-color:#ff00ff;"
+											offset="0"
+											id="stop876" />
+									  <stop
+											style="stop-color:#ff0000;"
+											offset="1"
+											id="stop878" />
+									</linearGradient>
+								  </defs>
+								  <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
+								</svg>
+								<div class="form">
+								  <form action="/login" method="POST">
+									  <label for="email">Username</label>
+									  <input type="text" id="email" name="username" required>
+									  <label for="password">Password</label>
+									  <input type="password" id="password" name="password" required>
+									  <input type="submit" id="submit" value="Submit" style="cursor: pointer;">
+								  </form>
+								</div>
+							  </div>
+							</div>
+						</div>
+					  </div>
+					</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+<%}else if(success && success.length){%>
+	<body class=""  onload="nowuiDashboard.showNotification('bottom','right','success','<%=success%>')">
+		<div class="wrapper ">
+		  <div class="sidebar" data-color="orange">
+			<div class="logo">
+			  <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+				  ONLINE JUDGE
+				</a>
+			</div>
+			<div class="sidebar-wrapper" id="sidebar-wrapper">
+			  <ul class="nav">
+				  <%if(currentUser != null){%>
+				  <li>
+					  <a href="/profile">
+					  <i class="now-ui-icons users_single-02"></i>
+					  <p>User Profile</p>
+					  </a>
+				  </li>
+				  <%}%>
+				  <li>
+					  <a href="/problems">
+					  <i class="now-ui-icons design_bullet-list-67"></i>
+					  <p>Problems</p>
+					  </a>
+				  </li>
+				  <%if(currentUser == null){%>
+					  <li>
+						  <a href="/register_U">
+							<i class="now-ui-icons ui-1_send"></i>
+							<p>Register For Users</p>
+						  </a>
+						</li>
+						<li>
+						  <a href="/register_C">
+							<i class="now-ui-icons ui-1_send"></i>
+							<p>Register For Contributors</p>
+						  </a>
+						</li>
+						<li>
+					  <li  class="active ">
+						<a href="/Login">
+						  <i class="now-ui-icons objects_key-25"></i>
+						  <p>Login</p>
+						</a>
+					  </li>
+				  <%}%>
+			  </ul>
+			</div>
+		  </div>
+		  <div class="main-panel" id="main-panel">
+			<!-- Navbar -->
+			<nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+			  <div class="container-fluid">
+				<div class="navbar-wrapper">
+				  <div class="navbar-toggle">
+					<button type="button" class="navbar-toggler">
+					  <span class="navbar-toggler-bar bar1"></span>
+					  <span class="navbar-toggler-bar bar2"></span>
+					  <span class="navbar-toggler-bar bar3"></span>
+					</button>
+				  </div>
+				  <a class="navbar-brand" href="">Login</a>
+				</div>
+				<%if(currentUser != null){%>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+				</button>
+				  <div class="collapse navbar-collapse justify-content-end" id="navigation">
+					<ul class="navbar-nav">
+					  <li class="nav-item">
+						<a class="nav-link" href="/profile">
+						  <i class="now-ui-icons users_single-02"></i>
+						  <p><%=currentUser.username%></p>
+						</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="/logout">
+						  <i class="now-ui-icons media-1_button-power"></i>
+						  <p> Logout </p>
+						</a>
+					  </li>
+					</ul>
+				  </div>
+				  <%}%>
+			  </div>
+			</nav>
+			<!-- End Navbar -->
+			<div class="panel-header panel-header-sm">
+			</div>
+			<div class="content">
+			  <div class="row">
+				  <div class="col-md-12">
+					  <div class="card card-plain">
+						<div class="card-header">
+						</div>
+						<div class="card-body" style="padding-top: 5%;">
+						  <div class="container">
+							  <div class="left">
+								<div class="login">Login</div>
+								<div class="eula">Welcome Back! To keep connected with us please login with your personal info.</div>
+							  </div>
+							  <div class="right">
+								<svg viewBox="0 0 320 300">
+								  <defs>
+									<linearGradient
+													inkscape:collect="always"
+													id="linearGradient"
+													x1="13"
+													y1="193.49992"
+													x2="307"
+													y2="193.49992"
+													gradientUnits="userSpaceOnUse">
+									  <stop
+											style="stop-color:#ff00ff;"
+											offset="0"
+											id="stop876" />
+									  <stop
+											style="stop-color:#ff0000;"
+											offset="1"
+											id="stop878" />
+									</linearGradient>
+								  </defs>
+								  <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
+								</svg>
+								<div class="form">
+								  <form action="/login" method="POST">
+									  <label for="email">Username</label>
+									  <input type="text" id="email" name="username" required>
+									  <label for="password">Password</label>
+									  <input type="password" id="password" name="password" required>
+									  <input type="submit" id="submit" value="Submit" style="cursor: pointer;">
+								  </form>
+								</div>
+							  </div>
+							</div>
+						</div>
+					  </div>
+					</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+<%}else{%>
+	<body class="">
+		<div class="wrapper ">
+		  <div class="sidebar" data-color="orange">
+			<div class="logo">
+			  <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+				  ONLINE JUDGE
+				</a>
+			</div>
+			<div class="sidebar-wrapper" id="sidebar-wrapper">
+			  <ul class="nav">
+				  <%if(currentUser != null){%>
+				  <li>
+					  <a href="/profile">
+					  <i class="now-ui-icons users_single-02"></i>
+					  <p>User Profile</p>
+					  </a>
+				  </li>
+				  <%}%>
+				  <li>
+					  <a href="/problems">
+					  <i class="now-ui-icons design_bullet-list-67"></i>
+					  <p>Problems</p>
+					  </a>
+				  </li>
+				  <%if(currentUser == null){%>
+					  <li>
+						  <a href="/register_U">
+							<i class="now-ui-icons ui-1_send"></i>
+							<p>Register For Users</p>
+						  </a>
+						</li>
+						<li>
+						  <a href="/register_C">
+							<i class="now-ui-icons ui-1_send"></i>
+							<p>Register For Contributors</p>
+						  </a>
+						</li>
+						<li>
+					  <li  class="active ">
+						<a href="/Login">
+						  <i class="now-ui-icons objects_key-25"></i>
+						  <p>Login</p>
+						</a>
+					  </li>
+				  <%}%>
+			  </ul>
+			</div>
+		  </div>
+		  <div class="main-panel" id="main-panel">
+			<!-- Navbar -->
+			<nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+			  <div class="container-fluid">
+				<div class="navbar-wrapper">
+				  <div class="navbar-toggle">
+					<button type="button" class="navbar-toggler">
+					  <span class="navbar-toggler-bar bar1"></span>
+					  <span class="navbar-toggler-bar bar2"></span>
+					  <span class="navbar-toggler-bar bar3"></span>
+					</button>
+				  </div>
+				  <a class="navbar-brand" href="">Login</a>
+				</div>
+				<%if(currentUser != null){%>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+					<span class="navbar-toggler-bar navbar-kebab"></span>
+				</button>
+				  <div class="collapse navbar-collapse justify-content-end" id="navigation">
+					<ul class="navbar-nav">
+					  <li class="nav-item">
+						<a class="nav-link" href="/profile">
+						  <i class="now-ui-icons users_single-02"></i>
+						  <p><%=currentUser.username%></p>
+						</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="/logout">
+						  <i class="now-ui-icons media-1_button-power"></i>
+						  <p> Logout </p>
+						</a>
+					  </li>
+					</ul>
+				  </div>
+				  <%}%>
+			  </div>
+			</nav>
+			<!-- End Navbar -->
+			<div class="panel-header panel-header-sm">
+			</div>
+			<div class="content">
+			  <div class="row">
+				  <div class="col-md-12">
+					  <div class="card card-plain">
+						<div class="card-header">
+						</div>
+						<div class="card-body" style="padding-top: 5%;">
+						  <div class="container">
+							  <div class="left">
+								<div class="login">Login</div>
+								<div class="eula">Welcome Back! To keep connected with us please login with your personal info.</div>
+							  </div>
+							  <div class="right">
+								<svg viewBox="0 0 320 300">
+								  <defs>
+									<linearGradient
+													inkscape:collect="always"
+													id="linearGradient"
+													x1="13"
+													y1="193.49992"
+													x2="307"
+													y2="193.49992"
+													gradientUnits="userSpaceOnUse">
+									  <stop
+											style="stop-color:#ff00ff;"
+											offset="0"
+											id="stop876" />
+									  <stop
+											style="stop-color:#ff0000;"
+											offset="1"
+											id="stop878" />
+									</linearGradient>
+								  </defs>
+								  <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
+								</svg>
+								<div class="form">
+								  <form action="/login" method="POST">
+									  <label for="email">Username</label>
+									  <input type="text" id="email" name="username" required>
+									  <label for="password">Password</label>
+									  <input type="password" id="password" name="password" required>
+									  <input type="submit" id="submit" value="Submit" style="cursor: pointer;">
+								  </form>
+								</div>
+							  </div>
+							</div>
+						</div>
+					  </div>
+					</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+<%}%>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.js" integrity="sha512-E378bwaeZf1nwXeJGIwTB58A5gPt5jFU3u6aTGja4ZdRFJeo/N/REKnBgNZOZlH6JdnOPO98vg2AnSGaNfCMFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/login.js"></script>
+<%- include("./partials/contributor/footer.ejs") %>
+  

@@ -1,0 +1,593 @@
+<%- include("./partials/contributor/header.ejs") %>
+<%if(error && error.length){%>
+  <body class="user-profile" onload="nowuiDashboard.showNotification('bottom','right','error','<%=error%>')">
+    <div class="wrapper ">
+      <div class="sidebar" data-color="orange">
+        <div class="logo">
+          <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+              ONLINE JUDGE
+            </a>
+        </div>
+        <div class="sidebar-wrapper" id="sidebar-wrapper">
+          <ul class="nav">
+            <li class="active ">
+              <a href="/profile">
+                <i class="now-ui-icons users_single-02"></i>
+                <p>Contributor Profile</p>
+              </a>
+            </li>
+            <li>
+              <a href="/contributor/problems">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p>Problems</p>
+              </a>
+            </li>
+            <li>
+              <a href="/contributor/addproblem">
+                <i class="now-ui-icons ui-1_simple-add"></i>
+                <p>Add New Problem</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-panel" id="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+          <div class="container-fluid">
+            <div class="navbar-wrapper">
+              <div class="navbar-toggle">
+                <button type="button" class="navbar-toggler">
+                  <span class="navbar-toggler-bar bar1"></span>
+                  <span class="navbar-toggler-bar bar2"></span>
+                  <span class="navbar-toggler-bar bar3"></span>
+                </button>
+              </div>
+              <a class="navbar-brand" href="">Contributor Profile</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/profile">
+                    <i class="now-ui-icons users_single-02"></i>
+                    <p><%=currentUser.username%></p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">
+                    <i class="now-ui-icons media-1_button-power"></i>
+                    <p> Logout </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="panel-header panel-header-sm">
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                  <h5 class="title">Edit Profile</h5>
+                </div>
+                <div class="card-body">
+                  <form action="/profile?_method=PUT" method="POST">
+                    <div class="row">
+                      <div class="col-md-5 pr-1">
+                        <div class="form-group">
+                          <label>Username</label>
+                          <input type="text" class="form-control" disabled="" placeholder="Username" name="user[username]" value="<%=user.username%>">
+                        </div>
+                      </div>
+                      <div class="col-md-3 px-1">
+                        <div class="form-group">
+                          <label>Phone</label>
+                          <input type="text" class="form-control" placeholder="Phone" value="<%=user.phone%>" name="user[phone]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control" placeholder="Email" value="<%=user.email%>" name="user[email]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                          <label>First Name</label>
+                          <input type="text" class="form-control" placeholder="First Name" value="<%=user.firstname%>" name="user[firstname]">
+                        </div>
+                      </div>
+                      <div class="col-md-6 pl-1">
+                        <div class="form-group">
+                          <label>Last Name</label>
+                          <input type="text" class="form-control" placeholder="Last Name" value="<%=user.lastname%>" name="user[lastname]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>College</label>
+                          <input type="text" class="form-control" placeholder="College Name" value="<%=user.college%>" name="user[college]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                          <label>City</label>
+                          <input type="text" class="form-control" placeholder="City" value="<%=user.city%>" name="user[city]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 px-1">
+                        <div class="form-group">
+                          <label>Country</label>
+                          <input type="text" class="form-control" placeholder="Country" value="<%=user.country%>" name="user[country]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label>Postal Code</label>
+                          <input type="number" class="form-control" placeholder="ZIP Code" value="<%=user.postal%>" name="user[postal]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>About Me</label>
+                          <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" name="user[aboutme]"><%=user.aboutme%></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12" style="text-align: center;">
+                        <button type="submit" class="btn btn-info">Update</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-user">
+                <div class="image">
+                  <img src="/img/bg5.jpg" alt="...">
+                </div>
+                <div class="card-body">
+                  <div class="author">
+                    <a href="">
+                      <img class="avatar border-gray" src="/img/mike.jpg" alt="...">
+                      <h5 class="title"><%=user.firstname%> <%=user.lastname%></h5>
+                    </a>
+                    <p class="description">
+                      <%=user.username%>
+                    </p>
+                  </div>
+                  <p class="description text-center">
+                    <%=user.aboutus%>
+                  </p>
+                </div>
+                <hr>
+                <div class="button-container">
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-google-plus-g"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<%}else if(success && success.length){%>
+  <body class="user-profile" onload="nowuiDashboard.showNotification('bottom','right','success','<%=success%>')">
+    <div class="wrapper ">
+      <div class="sidebar" data-color="orange">
+        <div class="logo">
+          <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+              ONLINE JUDGE
+            </a>
+        </div>
+        <div class="sidebar-wrapper" id="sidebar-wrapper">
+          <ul class="nav">
+            <li class="active ">
+              <a href="/profile">
+                <i class="now-ui-icons users_single-02"></i>
+                <p>Contributor Profile</p>
+              </a>
+            </li>
+            <li>
+              <a href="/contributor/problems">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p>Problems</p>
+              </a>
+            </li>
+            <li>
+              <a href="/contributor/addproblem">
+                <i class="now-ui-icons ui-1_simple-add"></i>
+                <p>Add New Problem</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-panel" id="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+          <div class="container-fluid">
+            <div class="navbar-wrapper">
+              <div class="navbar-toggle">
+                <button type="button" class="navbar-toggler">
+                  <span class="navbar-toggler-bar bar1"></span>
+                  <span class="navbar-toggler-bar bar2"></span>
+                  <span class="navbar-toggler-bar bar3"></span>
+                </button>
+              </div>
+              <a class="navbar-brand" href="">Contributor Profile</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/profile">
+                    <i class="now-ui-icons users_single-02"></i>
+                    <p><%=currentUser.username%></p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">
+                    <i class="now-ui-icons media-1_button-power"></i>
+                    <p> Logout </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="panel-header panel-header-sm">
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="title">Edit Profile</h5>
+                </div>
+                <div class="card-body">
+                  <form action="/profile?_method=PUT" method="POST">
+                    <div class="row">
+                      <div class="col-md-5 pr-1">
+                        <div class="form-group">
+                          <label>Username</label>
+                          <input type="text" class="form-control" disabled="" placeholder="Username" name="user[username]" value="<%=user.username%>">
+                        </div>
+                      </div>
+                      <div class="col-md-3 px-1">
+                        <div class="form-group">
+                          <label>Phone</label>
+                          <input type="text" class="form-control" placeholder="Phone" value="<%=user.phone%>" name="user[phone]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control" placeholder="Email" value="<%=user.email%>" name="user[email]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                          <label>First Name</label>
+                          <input type="text" class="form-control" placeholder="First Name" value="<%=user.firstname%>" name="user[firstname]">
+                        </div>
+                      </div>
+                      <div class="col-md-6 pl-1">
+                        <div class="form-group">
+                          <label>Last Name</label>
+                          <input type="text" class="form-control" placeholder="Last Name" value="<%=user.lastname%>" name="user[lastname]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>College</label>
+                          <input type="text" class="form-control" placeholder="College Name" value="<%=user.college%>" name="user[college]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                          <label>City</label>
+                          <input type="text" class="form-control" placeholder="City" value="<%=user.city%>" name="user[city]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 px-1">
+                        <div class="form-group">
+                          <label>Country</label>
+                          <input type="text" class="form-control" placeholder="Country" value="<%=user.country%>" name="user[country]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label>Postal Code</label>
+                          <input type="number" class="form-control" placeholder="ZIP Code" value="<%=user.postal%>" name="user[postal]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>About Me</label>
+                          <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" name="user[aboutme]"><%=user.aboutme%></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12" style="text-align: center;">
+                        <button type="submit" class="btn btn-info">Update</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-user">
+                <div class="image">
+                  <img src="/img/bg5.jpg" alt="...">
+                </div>
+                <div class="card-body">
+                  <div class="author">
+                    <a href="">
+                      <img class="avatar border-gray" src="/img/mike.jpg" alt="...">
+                      <h5 class="title"><%=user.firstname%> <%=user.lastname%></h5>
+                    </a>
+                    <p class="description">
+                      <%=user.username%>
+                    </p>
+                  </div>
+                  <p class="description text-center">
+                    <%=user.aboutus%>
+                  </p>
+                </div>
+                <hr>
+                <div class="button-container">
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-google-plus-g"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<%}else{%>
+  <body class="user-profile">
+    <div class="wrapper ">
+      <div class="sidebar" data-color="orange">
+        <div class="logo">
+          <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+              ONLINE JUDGE
+            </a>
+        </div>
+        <div class="sidebar-wrapper" id="sidebar-wrapper">
+          <ul class="nav">
+            <li class="active ">
+              <a href="/profile">
+                <i class="now-ui-icons users_single-02"></i>
+                <p>Contributor Profile</p>
+              </a>
+            </li>
+            <li>
+              <a href="/contributor/problems">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p>Problems</p>
+              </a>
+            </li>
+            <li>
+              <a href="/contributor/addproblem">
+                <i class="now-ui-icons ui-1_simple-add"></i>
+                <p>Add New Problem</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-panel" id="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+          <div class="container-fluid">
+            <div class="navbar-wrapper">
+              <div class="navbar-toggle">
+                <button type="button" class="navbar-toggler">
+                  <span class="navbar-toggler-bar bar1"></span>
+                  <span class="navbar-toggler-bar bar2"></span>
+                  <span class="navbar-toggler-bar bar3"></span>
+                </button>
+              </div>
+              <a class="navbar-brand" href="">Contributor Profile</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/profile">
+                    <i class="now-ui-icons users_single-02"></i>
+                    <p><%=currentUser.username%></p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">
+                    <i class="now-ui-icons media-1_button-power"></i>
+                    <p> Logout </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="panel-header panel-header-sm">
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="title">Edit Profile</h5>
+                </div>
+                <div class="card-body">
+                  <form action="/profile?_method=PUT" method="POST">
+                    <div class="row">
+                      <div class="col-md-5 pr-1">
+                        <div class="form-group">
+                          <label>Username</label>
+                          <input type="text" class="form-control" disabled="" placeholder="Username" name="user[username]" value="<%=user.username%>">
+                        </div>
+                      </div>
+                      <div class="col-md-3 px-1">
+                        <div class="form-group">
+                          <label>Phone</label>
+                          <input type="text" class="form-control" placeholder="Phone" value="<%=user.phone%>" name="user[phone]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control" placeholder="Email" value="<%=user.email%>" name="user[email]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                          <label>First Name</label>
+                          <input type="text" class="form-control" placeholder="First Name" value="<%=user.firstname%>" name="user[firstname]">
+                        </div>
+                      </div>
+                      <div class="col-md-6 pl-1">
+                        <div class="form-group">
+                          <label>Last Name</label>
+                          <input type="text" class="form-control" placeholder="Last Name" value="<%=user.lastname%>" name="user[lastname]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>College</label>
+                          <input type="text" class="form-control" placeholder="College Name" value="<%=user.college%>" name="user[college]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                          <label>City</label>
+                          <input type="text" class="form-control" placeholder="City" value="<%=user.city%>" name="user[city]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 px-1">
+                        <div class="form-group">
+                          <label>Country</label>
+                          <input type="text" class="form-control" placeholder="Country" value="<%=user.country%>" name="user[country]">
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label>Postal Code</label>
+                          <input type="number" class="form-control" placeholder="ZIP Code" value="<%=user.postal%>" name="user[postal]">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>About Me</label>
+                          <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" name="user[aboutme]"><%=user.aboutme%></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12" style="text-align: center;">
+                        <button type="submit" class="btn btn-info">Update</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-user">
+                <div class="image">
+                  <img src="/img/bg5.jpg" alt="...">
+                </div>
+                <div class="card-body">
+                  <div class="author">
+                    <a href="">
+                      <img class="avatar border-gray" src="/img/mike.jpg" alt="...">
+                      <h5 class="title"><%=user.firstname%> <%=user.lastname%></h5>
+                    </a>
+                    <p class="description">
+                      <%=user.username%>
+                    </p>
+                  </div>
+                  <p class="description text-center">
+                    <%=user.aboutme%>
+                  </p>
+                </div>
+                <hr>
+                <div class="button-container">
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button href="" class="btn btn-neutral btn-icon btn-round btn-lg">
+                    <i class="fab fa-google-plus-g"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<%}%>
+  <%- include("./partials/contributor/footer.ejs") %>

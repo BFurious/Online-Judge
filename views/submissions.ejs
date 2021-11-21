@@ -1,0 +1,173 @@
+<%- include("./partials/contributor/header.ejs") %>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="orange">
+      <div class="logo">
+        <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+            ONLINE JUDGE
+          </a>
+      </div>
+      <div class="sidebar-wrapper" id="sidebar-wrapper">
+        <ul class="nav">
+          <%if(currentUser != null){%>
+          <li>
+            <a href="/profile">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>User Profile</p>
+            </a>
+          </li>
+          <%}%>
+          <li>
+            <a href="/problems">
+              <i class="now-ui-icons design_bullet-list-67"></i>
+              <p>Problems</p>
+            </a>
+          </li>
+          <%if(currentUser == null){%>
+            <li>
+              <a href="/register_U">
+                <i class="now-ui-icons ui-1_send"></i>
+                <p>Register For Users</p>
+              </a>
+            </li>
+            <li>
+              <a href="/register_C">
+                <i class="now-ui-icons ui-1_send"></i>
+                <p>Register For Contributors</p>
+              </a>
+            </li>
+        <li>
+                  <a href="/Login">
+                    <i class="now-ui-icons objects_key-25"></i>
+                    <p>Login</p>
+                  </a>
+                </li>
+          <%}%>
+          <%if(currentUser != null){%>
+            <li class="active ">
+              <a href="/submissions">
+                <i class="now-ui-icons files_paper"></i>
+                <p>All Submissions</p>
+              </a>
+            </li>
+            <li>
+              <a href="/solved">
+                <i class="now-ui-icons education_agenda-bookmark"></i>
+                <p>Solved Questions</p>
+              </a>
+            </li>
+            <%}%>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel" id="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="">Submissions</a>
+          </div>
+          <%if(currentUser != null){%>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">
+                  <i class="now-ui-icons users_single-02"></i>
+                  <p><%=currentUser.username%></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                  <i class="now-ui-icons media-1_button-power"></i>
+                  <p> Logout </p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <%}%>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="panel-header panel-header-sm">
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title"> Problems</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Problem
+                      </th>
+                      <th>
+                        Difficulty
+                      </th>
+                      <th>
+                        Verdict
+                      </th>
+                      <th class="text-right">
+                        Code
+                      </th>
+                    </thead>
+                    <tbody>
+                      <%submissions.forEach(function(submission){%>
+                        <%questions.forEach(function(question){%>
+                            <%if(submission.question_id.equals(question._id)){%>
+                                <tr>
+                                    <td>
+                                        <%= question.title%>
+                                    </td>
+                                    <%if(question.difficulty == "Easy"){%>
+                                        <td style="color: darkseagreen;">
+                                            <%= question.difficulty%>
+                                        </td>
+                                    <%}else if(question.difficulty == "Medium"){%>
+                                        <td style="color: sandybrown;">
+                                            <%= submission.question_id.difficulty%>
+                                        </td>
+                                    <%}else{%>
+                                        <td style="color: red;">
+                                            <%= submission.question_id.difficulty%>
+                                        </td>
+                                    <%}%>
+                                    <td>
+                                        <%= submission.verdict%>
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="/submissions/<%=submission._id%>"><button class="btn btn-success">View Code</button></a>
+                                    </td>
+                                </tr>
+                            <%}%>
+                        <%})%>
+                      <%})%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<%- include("./partials/contributor/footer.ejs") %>

@@ -1,0 +1,191 @@
+<%- include("./partials/contributor/header.ejs") %>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="orange">
+      <div class="logo">
+        <a href="/home" class="simple-text logo-normal" style="text-align: center;">
+            ONLINE JUDGE
+          </a>
+      </div>
+      <div class="sidebar-wrapper" id="sidebar-wrapper">
+        <ul class="nav">
+          <%if(currentUser != null){%>
+          <li>
+            <a href="/profile">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>User Profile</p>
+            </a>
+          </li>
+          <%}%>
+          <li>
+            <a href="/problems">
+              <i class="now-ui-icons design_bullet-list-67"></i>
+              <p>Problems</p>
+            </a>
+          </li>
+          <%if(currentUser == null){%>
+            <li>
+              <a href="/register_U">
+                <i class="now-ui-icons ui-1_send"></i>
+                <p>Register For Users</p>
+              </a>
+            </li>
+            <li>
+              <a href="/register_C">
+                <i class="now-ui-icons ui-1_send"></i>
+                <p>Register For Contributors</p>
+              </a>
+            </li>
+        <li>
+                  <a href="/Login">
+                    <i class="now-ui-icons objects_key-25"></i>
+                    <p>Login</p>
+                  </a>
+                </li>
+          <%}%>
+          <%if(currentUser != null){%>
+            <li>
+              <a href="/submissions">
+                <i class="now-ui-icons files_paper"></i>
+                <p>All Submissions</p>
+              </a>
+            </li>
+            <li class="active ">
+              <a href="/solved">
+                <i class="now-ui-icons education_agenda-bookmark"></i>
+                <p>Solved Questions</p>
+              </a>
+            </li>
+            <%}%>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel" id="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="">Solved Problems</a>
+          </div>
+          <%if(currentUser != null){%>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">
+                  <i class="now-ui-icons users_single-02"></i>
+                  <p><%=currentUser.username%></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                  <i class="now-ui-icons media-1_button-power"></i>
+                  <p> Logout </p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <%}%>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="panel-header panel-header-sm">
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title"> Problems</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Status
+                      </th>
+                      <th>
+                        Problem
+                      </th>
+                      <th>
+                        Difficulty
+                      </th>
+                      <th>
+                        Description
+                      </th>
+                    </thead>
+                    <tbody>
+                      <%questions.forEach(function(question){%>
+                        <%if(question.difficulty == "Easy"){%>
+                          <tr>
+                            <td style="color: limegreen;">
+                                <i class="now-ui-icons ui-1_check"></i>
+                              </td>
+                            <td>
+                              <%= question.title%>
+                            </td>
+                            <td style="color: darkseagreen;">
+                              Easy
+                            </td>
+                            <td>
+                                <%= question.problem_statement%>
+                            </td>
+                          </tr>
+                        <%}else if(question.difficulty == "Medium"){%>
+                          <tr>
+                            <td style="color: limegreen;">
+                              <i class="now-ui-icons ui-1_check"></i>
+                            </td>
+                            <td>
+                              <%= question.title%>
+                            </td>
+                            <td style="color: sandybrown;">
+                              Medium
+                            </td>
+                            <td>
+                                <%= question.problem_statement%>
+                            </td>
+                          </tr>
+                        <%}else{%>
+                          <tr>
+                            <td style="color: limegreen;">
+                              <i class="now-ui-icons ui-1_check"></i>
+                            </td>
+                            <td>
+                              <%= question.title%>
+                            </td>
+                            <td style="color: red;">
+                              Hard
+                            </td>
+                            <td>
+                                <%= question.problem_statement%>
+                            </td>
+                          </tr>
+                        <%}%>
+                      <%})%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<%- include("./partials/contributor/footer.ejs") %>
